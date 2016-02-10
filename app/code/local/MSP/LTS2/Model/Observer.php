@@ -53,7 +53,7 @@ class MSP_LTS2_Model_Observer
 		if (Mage::helper('msp_lts2')->isAdminArea())
 			return $this;
 
-        Mage::register('msp_lts_start2', microtime(true));
+        //Mage::register('msp_lts_start2', microtime(true));
 
 		$cacheIsActive = Mage::helper('msp_lts2/cache')->isActive();
 		if (!$cacheIsActive)
