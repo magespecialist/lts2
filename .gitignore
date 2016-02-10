@@ -1,0 +1,5 @@
+.settings
+.project
+.git
+./*.DS_Store
+.idea
