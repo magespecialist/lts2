@@ -2,9 +2,21 @@
 
 LTS2 is an advanced FPC cache engine for Magento 1.x with nested blocks capability.
 
-## Getting started
+## How to install
 
-Just copy in your Magento root and turn on "System > Cache Management" ;)
+* First of all you have to turn off your Magento cache (very important)
+* Copy this module in your Magento root
+* Turn on your cache by clicking "refresh"
+ 
+If you get an error empty your cache manually:
+
+In standard installations you must clear the content of var/cache (be careful, do not remove the folder itself).
+If you have another cache engine like redis or memcache you will have to flush them or restart.
+
+## How to uninstall
+
+Just remove the files ;)
+Remember to remove app/code/local/Mage/Core/Block/Abstract.php
 
 ## Configuring the cache
 
