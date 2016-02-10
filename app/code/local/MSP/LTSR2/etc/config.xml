@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * IDEALIAGroup srl
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.idealiagroup.com/magento-ext-license.html
+ *
+ * @category   MSP
+ * @package    MSP_LTS2
+ * @copyright  Copyright (c) 2013 IDEALIAGroup srl (http://www.idealiagroup.com)
+ * @license    http://www.idealiagroup.com/magento-ext-license.html
+ */
+-->
+<config>
+	<modules>
+		<MSP_LTSR2>
+			<version>1.0.0</version>
+		</MSP_LTSR2>
+	</modules>
+	
+	<global>
+		<models>
+			<msp_ltsr2>
+				<class>MSP_LTSR2_Model</class>
+			</msp_ltsr2>
+		</models>
+	</global>
+</config>

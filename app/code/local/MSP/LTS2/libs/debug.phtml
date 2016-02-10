@@ -1,0 +1,45 @@
+<?php
+/**
+ * IDEALIAGroup srl
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.idealiagroup.com/magento-ext-license.html
+ *
+ * @category   MSP
+ * @package    MSP_LTS
+ * @copyright  Copyright (c) 2013 IDEALIAGroup srl (http://www.idealiagroup.com)
+ * @license    http://www.idealiagroup.com/magento-ext-license.html
+ */
+
+$ltsCache = Mage::getSingleton('msp_lts2/cache');
+
+$elapsedTime = number_format(microtime(true) - Mage::registry('msp_lts_start'), 4);
+$elapsedTime2 = number_format(microtime(true) - Mage::registry('msp_lts_start2'), 4);
+$involvedBlocks = $ltsCache->getInvolvedBlocksList();
+$cacheBlockStatus = $ltsCache->getCacheBlockStatus();
+$cacheActionStatus = $ltsCache->getCacheActionStatus();
+$cacheLayoutStatus = $ltsCache->getCacheLayoutStatus();
+?>
+<script type="text/javascript">
+//<![CDATA[
+console.log("MSP_LTS2 - LOADED");
+console.log("MSP_LTS2 - TOTAL TIME: <?php echo $elapsedTime; ?>");
+console.log("MSP_LTS2 - PAGE BUILD TIME: <?php echo $elapsedTime2; ?>");
+
+console.log("MSP_LTS2 - FPC CACHE: <?php echo $cacheActionStatus; ?>");
+console.log("MSP_LTS2 - LAYOUT CACHE: <?php echo $cacheLayoutStatus; ?>");
+
+console.log("MSP_LTS2 - ACTION: <?php echo Mage::helper('msp_lts2')->getActionName(); ?>");
+console.log("MSP_LTS2 - ACTION KEY: <?php echo $ltsCache->getActionCacheKey(); ?>");
+console.log("MSP_LTS2 - URL: <?php echo Mage::helper('msp_lts2')->getUrl(); ?>");
+console.log("MSP_LTS2 - INTERNAL URL: <?php echo Mage::helper('msp_lts2')->getInternalUrl(); ?>");
+
+<?php foreach ($involvedBlocks as $involvedBlock): ?>
+console.log("MSP_LTS2 - [<?php echo $involvedBlock ?>] <?php echo $cacheBlockStatus[$involvedBlock]['status'] ?> - <?php echo $ltsCache->getBlockCacheKey($involvedBlock) ?>");
+<?php endforeach; ?>
+//]]>
+</script>

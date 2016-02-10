@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * IDEALIAGroup srl
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.idealiagroup.com/magento-ext-license.html
+ *
+ * @category   MSP
+ * @package    MSP_LTS2
+ * @copyright  Copyright (c) 2013 IDEALIAGroup srl (http://www.idealiagroup.com)
+ * @license    http://www.idealiagroup.com/magento-ext-license.html
+ */
+-->
+<config>
+	<modules>
+		<MSP_LTS2>
+			<version>1.0.0</version>
+		</MSP_LTS2>
+	</modules>
+	
+	<global>
+		<ignoredModules>
+            <entities>
+                <catalog/>
+                <cms/>
+            </entities>
+        </ignoredModules>
+	
+		<helpers>
+			<msp_lts2>
+				<class>MSP_LTS2_Helper</class>
+			</msp_lts2>
+        </helpers>
+
+		<models>
+			<msp_lts2>
+				<class>MSP_LTS2_Model</class>
+			</msp_lts2>
+		</models>
+		
+		<blocks>
+			<msp_lts2>
+				<class>MSP_LTS2_Block</class>
+			</msp_lts2>
+			
+			<core>
+				<rewrite>
+					<messages>MSP_LTS2_Block_Core_Messages</messages>
+				</rewrite>
+			</core>
+		</blocks>
+		
+		<cache>
+			<types>
+				<msp_lts2 translate="label,description" module="msp_lts2">
+					<label><![CDATA[MSP-LS2]]></label>
+					<description><![CDATA[LightSpeed v2 Accelerator Module by MageSpecialist]]></description>
+					<tags><![CDATA[MSP_LIGHTSPEED2]]></tags>
+				</msp_lts2>
+			</types>
+		</cache>
+		
+		<events>
+			<http_response_send_before>
+				<observers>
+					<msp_lts2>
+						<class>msp_lts2/observer</class>
+						<type>singleton</type>
+						<method>onHttpResponseSendBefore</method>
+					</msp_lts2>
+				</observers>
+			</http_response_send_before>
+			
+			<controller_action_layout_load_before>
+				<observers>
+					<msp_lts2>
+						<class>msp_lts2/observer</class>
+						<type>singleton</type>
+						<method>onControllerActionLayoutLoadBefore</method>
+					</msp_lts2>
+				</observers>
+			</controller_action_layout_load_before>
+
+			<model_save_after>
+                <observers>
+                    <msp_lts2>
+                        <class>msp_lts2/observer</class>
+                        <type>singleton</type>
+                        <method>onModelSaveAfter</method>
+                    </msp_lts2>
+                </observers>
+            </model_save_after>
+		</events>
+	</global>
+	
+	<frontend>
+		<events>
+			
+		</events>
+	</frontend>
+</config>
