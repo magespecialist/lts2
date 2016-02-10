@@ -4,7 +4,7 @@ LTS2 is an advanced FPC cache engine for Magento 1.x with nested blocks capabili
 
 ## Getting started
 
-Just copy in your Magento root and turn on for "System > Cache Management" ;)
+Just copy in your Magento root and turn on "System > Cache Management" ;)
 
 ## Configuring the cache
 
