@@ -96,4 +96,8 @@ class MSP_LTS2_Helper_Data extends Mage_Core_Helper_Abstract
 	{
 		return Mage::app()->getRequest()->getRequestUri();
 	}
+
+	public function getStoreId() {
+		return Mage::app()->getStore()->getId();
+	}
 }

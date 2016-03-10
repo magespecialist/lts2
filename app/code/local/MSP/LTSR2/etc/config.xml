@@ -17,17 +17,41 @@
  */
 -->
 <config>
-	<modules>
-		<MSP_LTSR2>
-			<version>1.0.0</version>
-		</MSP_LTSR2>
-	</modules>
-	
-	<global>
-		<models>
-			<msp_ltsr2>
-				<class>MSP_LTSR2_Model</class>
-			</msp_ltsr2>
-		</models>
-	</global>
+    <modules>
+        <MSP_LTSR2>
+            <version>1.0.1</version>
+        </MSP_LTSR2>
+    </modules>
+
+    <global>
+        <models>
+            <msp_ltsr2>
+                <class>MSP_LTSR2_Model</class>
+            </msp_ltsr2>
+        </models>
+    </global>
+    <default>
+        <MSP_LTSR2>
+            <settings>
+                <nocacheblocks><![CDATA[core_profiler
+global_messages
+messages
+global_notices
+country_detector]]></nocacheblocks>
+                <sessionblocks><![CDATA[cart_sidebar
+cart_sidebar_mini
+top.links
+cart_top
+top.container
+wishlist_link
+checkout_cart_link]]></sessionblocks>
+                <sessionactions><![CDATA[cms_index_index
+cms_page_view
+catalog_product_view
+catalog_category_default
+catalog_category_view
+catalog_category_layered]]></sessionactions>
+            </settings>
+        </MSP_LTSR2>
+    </default>
 </config>
