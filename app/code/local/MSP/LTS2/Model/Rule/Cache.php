@@ -21,6 +21,10 @@ abstract class MSP_LTS2_Model_Rule_Cache
 	const HANDLING_CACHE = 'cache'; // Cacheable under defined circumstances
 	const HANDLING_STATIC = 'static'; // Recursivley cache contents within cached section
 
+	protected $_sessionBlocks;
+	protected $_noCacheBlocks;
+	protected $_sessionActions;
+
 	/**
 	 * Return session key
 	 * @return string
@@ -85,6 +89,47 @@ abstract class MSP_LTS2_Model_Rule_Cache
 		return array('type' => self::HANDLING_NOCACHE, 'keys' => array(), 'lifetime' => 0, 'tags' => array());
 	}
 
+
+	protected function _getSessionBlocks() {
+		if(!$this->_sessionBlocks) {
+			$sessionBlocks = Mage::getStoreConfig('MSP_LTSR2/settings/sessionblocks', Mage::helper('msp_lts2')->getStoreId());
+			if(!empty($sessionBlocks)) {
+				$this->_sessionBlocks = explode("\n", $sessionBlocks);
+			} else {
+				$this->_sessionBlocks = array();
+			}
+		}
+
+		return $this->_sessionBlocks;
+	}
+
+	protected function _getNoCacheBlocks() {
+		if(!$this->_noCacheBlocks) {
+			$nocacheBlocks = Mage::getStoreConfig('MSP_LTSR2/settings/nocacheblocks', Mage::helper('msp_lts2')->getStoreId());
+			if(!empty($nocacheBlocks)) {
+				$this->_noCacheBlocks = explode("\n", $nocacheBlocks);
+			} else {
+				$this->_noCacheBlocks = array();
+			}
+		}
+
+		return $this->_noCacheBlocks;
+	}
+
+	protected function _getSessionActions() {
+		if(!$this->_sessionActions) {
+			$sessionActions = Mage::getStoreConfig('MSP_LTSR2/settings/sessionactions', Mage::helper('msp_lts2')->getStoreId());
+			if(!empty($sessionActions)) {
+				$this->_sessionActions = explode("\n", $sessionActions);
+			} else {
+				$this->_sessionActions = array();
+			}
+		}
+
+		return $this->_sessionActions;
+	}
+
+
 	/**
 	 * Get block cache key
 	 * @param string $blockName
@@ -95,7 +140,7 @@ abstract class MSP_LTS2_Model_Rule_Cache
 		$res = $this->_getBlockCacheData($blockName);
 		$res['keys'][] = $blockName;
 		$res['keys'][] = Mage::app()->getStore()->getId();
-		if (in_array($blockName, array('core_profiler', 'global_messages', 'messages', 'global_notices')))
+		if (in_array($blockName, $this->_getNoCacheBlocks()))
 		{
 			$res['type'] = self::HANDLING_NOCACHE;
 		}

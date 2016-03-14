@@ -17,7 +17,8 @@
 
 class MSP_LTSR2_Model_Cache extends MSP_LTS2_Model_Rule_Cache
 {
-    public function isCacheDebugActive()
+
+	public function isCacheDebugActive()
     {
         return false;
     }
@@ -84,15 +85,7 @@ class MSP_LTSR2_Model_Cache extends MSP_LTS2_Model_Rule_Cache
         }
 
         // Session related
-        if (in_array($blockName, array(
-            'cart_sidebar',
-            'cart_sidebar_mini',
-            'top.links',
-            'cart_top',
-            'top.container',
-            'wishlist_link',
-            'checkout_cart_link',
-        ))) {
+        if (in_array($blockName, $this->_getSessionBlocks())) {
             $keys[] = $this->_getSessionCode();
             $keys[] = $this->_getUserId();
             $lifetime = 60*15;
@@ -111,14 +104,7 @@ class MSP_LTSR2_Model_Cache extends MSP_LTS2_Model_Rule_Cache
 
         $actionName = Mage::helper('msp_lts2')->getActionName();
 
-        if (in_array($actionName, array(
-            'cms_index_index',
-            'cms_page_view',
-            'catalog_product_view',
-            'catalog_category_default',
-            'catalog_category_view',
-            'catalog_category_layered',
-        ))) {
+        if (in_array($actionName, $this->_getSessionActions())) {
             $type = self::HANDLING_CACHE;
 
             $keys[] = serialize($_GET);
@@ -134,15 +120,12 @@ class MSP_LTSR2_Model_Cache extends MSP_LTS2_Model_Rule_Cache
         if ($this->_isInstance($modelInstance, 'Mage_Sales_Model_Quote'))
         {
             // Blocks here must be defined as "self::HANDLING_CACHE"
-            $return['session'][] = 'cart_sidebar';
-            $return['session'][] = 'cart_sidebar_mini';
-            $return['session'][] = 'top.container';
-            $return['session'][] = 'top.links';
-            $return['session'][] = 'cart_top';
-            $return['session'][] = 'checkout_cart_link';
-            $return['session'][] = 'wishlist_link';
+			foreach($this->_getSessionBlocks() as $blockName) {
+				$return['session'][] = $blockName;
+			}
         }
 
         return $return;
     }
+
 }

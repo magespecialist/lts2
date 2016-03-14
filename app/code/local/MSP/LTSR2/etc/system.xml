@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<tabs>
+		<MSP_LTSR2 translate="label">
+			<label>LightSpeed Cache</label>
+			<sort_order>100</sort_order>
+		</MSP_LTSR2>
+	</tabs>
+
+	<sections>
+		<MSP_LTSR2 translate="label">
+			<label>Cache settings</label>
+			<tab>MSP_LTSR2</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>1</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<settings translate="label">
+					<label>Configuration</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<nocacheblocks translate="label">
+							<label>NoCache blocks</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                            <comment>Insert the names of the blocks you don't want to cache at all (separated by new line)</comment>
+						</nocacheblocks>
+                        <sessionblocks translate="label">
+                            <label>Session related blocks</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Insert the names of the blocks to be cached on a per session basis (separated by new line)</comment>
+                        </sessionblocks>
+                        <sessionactions translate="label">
+                            <label>Session related actions</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Insert the names of the actions to be cached on a per session basis (separated by new line). The default cache rule for an action is NOCACHE</comment>
+                        </sessionactions>
+					</fields>
+				</settings>
+			</groups>
+		</MSP_LTSR2>
+	</sections>
+</config>
