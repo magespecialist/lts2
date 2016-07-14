@@ -17,8 +17,7 @@
 
 class MSP_LTSR2_Model_Cache extends MSP_LTS2_Model_Rule_Cache
 {
-
-	public function isCacheDebugActive()
+    public function isCacheDebugActive()
     {
         return false;
     }
@@ -31,8 +30,7 @@ class MSP_LTSR2_Model_Cache extends MSP_LTS2_Model_Rule_Cache
         $tags = array();
 
         $cache = Mage::getSingleton('msp_lts2/cache');
-        if ($cache->canCacheAction())
-        {
+        if ($cache->canCacheAction()) {
             if (in_array($blockName, array(
                 'breadcrumbs',
             ))) {
@@ -67,6 +65,14 @@ class MSP_LTSR2_Model_Cache extends MSP_LTS2_Model_Rule_Cache
 
                 }
             }
+
+            if ($type == self::HANDLING_CACHE) {
+                if (in_array($actionName, array(
+                    'catalog_product_view',
+                ))) {
+                    $tags[] = 'CATALOG_PRODUCT_' . Mage::app()->getRequest()->getParam('id');
+                }
+            }
         }
 
         if (in_array($blockName, array(
@@ -91,13 +97,13 @@ class MSP_LTSR2_Model_Cache extends MSP_LTS2_Model_Rule_Cache
             $lifetime = 60*15;
             $type = self::HANDLING_CACHE;
         }
-
         return array('type' => $type, 'keys' => $keys, 'lifetime' => $lifetime, 'tags' => $tags);
     }
 
     protected function _getActionCacheData()
     {
         $type = self::HANDLING_NOCACHE;
+
         $lifetime = 86400*30;
         $tags = array();
         $keys = array();
@@ -107,7 +113,15 @@ class MSP_LTSR2_Model_Cache extends MSP_LTS2_Model_Rule_Cache
         if (in_array($actionName, $this->_getSessionActions())) {
             $type = self::HANDLING_CACHE;
 
+            // @codingStandardsIgnoreStart
             $keys[] = serialize($_GET);
+            // @codingStandardsIgnoreEnd
+        }
+
+        if (in_array($actionName, array(
+            'catalog_product_view',
+        ))) {
+            $tags[] = 'CATALOG_PRODUCT_' . Mage::app()->getRequest()->getParam('id');
         }
 
         return array('type' => $type, 'lifetime' => $lifetime, 'tags' => $tags, 'keys' => $keys);
@@ -117,12 +131,11 @@ class MSP_LTSR2_Model_Cache extends MSP_LTS2_Model_Rule_Cache
     {
         $return = array('global' => array(), 'session' => array());
 
-        if ($this->_isInstance($modelInstance, 'Mage_Sales_Model_Quote'))
-        {
+        if ($this->_isInstance($modelInstance, 'Mage_Sales_Model_Quote')) {
             // Blocks here must be defined as "self::HANDLING_CACHE"
-			foreach($this->_getSessionBlocks() as $blockName) {
-				$return['session'][] = $blockName;
-			}
+            foreach ($this->_getSessionBlocks() as $blockName) {
+                $return['session'][] = $blockName;
+            }
         }
 
         return $return;

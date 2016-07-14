@@ -38,7 +38,7 @@ console.log("MSP_LTS2 - ACTION KEY: <?php echo $ltsCache->getActionCacheKey(); ?
 console.log("MSP_LTS2 - URL: <?php echo Mage::helper('msp_lts2')->getUrl(); ?>");
 console.log("MSP_LTS2 - INTERNAL URL: <?php echo Mage::helper('msp_lts2')->getInternalUrl(); ?>");
 
-<?php foreach ($involvedBlocks as $involvedBlock): ?>
+<?php foreach ($involvedBlocks as $involvedBlock) : ?>
 console.log("MSP_LTS2 - [<?php echo $involvedBlock ?>] <?php echo $cacheBlockStatus[$involvedBlock]['status'] ?> - <?php echo $ltsCache->getBlockCacheKey($involvedBlock) ?>");
 <?php endforeach; ?>
 //]]>

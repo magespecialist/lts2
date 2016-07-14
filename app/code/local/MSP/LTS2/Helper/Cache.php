@@ -17,12 +17,12 @@
 
 class MSP_LTS2_Helper_Cache extends Mage_Core_Helper_Abstract
 {
-	/**
-	 * Retrun cache activation status
-	 * @retun bool
-	 */
-	public function isActive()
-	{
-		return Mage::app()->useCache('msp_lts2');
-	}
+    /**
+    * Retrun cache activation status
+    * @retun bool
+    */
+    public function isActive()
+    {
+        return Mage::app()->useCache('msp_lts2');
+    }
 }

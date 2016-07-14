@@ -17,13 +17,13 @@
 
 class MSP_LTS2_Model_Processor
 {
-	/**
-	 * Extract cache content
-	 * @param string $originalContent
-	 * @return string
-	 */
-	public function extractContent($originalContent)
-	{
-		return null;
-	}
+    /**
+     * Extract cache content
+     * @param string $originalContent
+     * @return string
+     */
+    public function extractContent($originalContent)
+    {
+        return null;
+    }
 }

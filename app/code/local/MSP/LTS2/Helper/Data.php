@@ -23,61 +23,67 @@ class MSP_LTS2_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function isAdminArea()
     {
-        if (Mage::app()->getStore()->isAdmin())
+        if (Mage::app()->getStore()->isAdmin()) {
             return true;
+        }
 
-        if (Mage::getSingleton('core/design_package')->getArea() != 'frontend')
+
+        if (Mage::getSingleton('core/design_package')->getArea() != 'frontend') {
             return true;
-
-        return false;
+        }
     }
 
-	/**
-	 * Return session key
-	 * @return string
-	 */
-	public function getSessionCode()
-	{
-		return session_id();
-	}
-	
-	/**
-	 * Return userid (0 for not loggedin)
-	 * @return int
-	 */
-	public function getUserId()
-	{
-		if (!Mage::getSingleton('customer/session')->isLoggedIn())
-			return 0;
-	
-		return Mage::getSingleton('customer/session')->getCustomer()->getId();
-	}
-	
-	/**
-	 * Return groupid (0 for not loggedin)
-	 * @return int
-	 */
-	public function getGroupId()
-	{
-		if (!Mage::getSingleton('customer/session')->isLoggedIn())
-			return 0;
-	
-		return Mage::getSingleton('customer/session')->getCustomer()->getGroupId();
-	}
-	
-	/**
-	 * Return full requested action name
-	 * @return string
-	 */
-	public function getActionName()
-	{
-		$request = Mage::app()->getRequest();
-		return implode('_', array(
-			$request->getRequestedRouteName(),
-			$request->getRequestedControllerName(),
-			$request->getRequestedActionName(),
-		));
-	}
+    /**
+     * Return session key
+     * @return string
+     */
+    public function getSessionCode()
+    {
+        // @codingStandardsIgnoreStart
+        return session_id();
+        // @codingStandardsIgnoreEnd
+    }
+    
+    /**
+     * Return userid (0 for not loggedin)
+     * @return int
+     */
+    public function getUserId()
+    {
+        if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
+            return 0;
+        }
+
+    
+        return Mage::getSingleton('customer/session')->getCustomer()->getId();
+    }
+    
+    /**
+     * Return groupid (0 for not loggedin)
+     * @return int
+     */
+    public function getGroupId()
+    {
+        if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
+            return 0;
+        }
+
+        return Mage::getSingleton('customer/session')->getCustomer()->getGroupId();
+    }
+    
+    /**
+     * Return full requested action name
+     * @return string
+     */
+    public function getActionName()
+    {
+        $request = Mage::app()->getRequest();
+        return implode('_', array(
+            $request->getRequestedRouteName(),
+            $request->getRequestedControllerName(),
+            $request->getRequestedActionName(),
+        ));
+    }
 
     /**
      * Return URL
@@ -85,19 +91,22 @@ class MSP_LTS2_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getUrl()
     {
-       return $_SERVER['REQUEST_URI'];
+        // @codingStandardsIgnoreStart
+        return $_SERVER['REQUEST_URI'];
+        // @codingStandardsIgnoreEnd
     }
 
-	/**
-	 * Return URL
-	 * @return string
-	 */
-	public function getInternalUrl()
-	{
-		return Mage::app()->getRequest()->getRequestUri();
-	}
+    /**
+     * Return URL
+     * @return string
+     */
+    public function getInternalUrl()
+    {
+        return Mage::app()->getRequest()->getRequestUri();
+    }
 
-	public function getStoreId() {
-		return Mage::app()->getStore()->getId();
-	}
+    public function getStoreId()
+    {
+        return Mage::app()->getStore()->getId();
+    }
 }
