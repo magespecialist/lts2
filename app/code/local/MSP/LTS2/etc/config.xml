@@ -19,7 +19,7 @@
 <config>
 	<modules>
 		<MSP_LTS2>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</MSP_LTS2>
 	</modules>
 	
