@@ -144,8 +144,6 @@ class MSP_LTS2_Model_Layout
 
         $blocksName = $this->_blocksName;
         $layoutHandles = $this->_layoutHandles;
-        $layoutHandles[] = Mage::getSingleton('customer/session')->isLoggedIn() ?
-            'customer_logged_in' : 'customer_logged_out';
 
         if (!in_array('messages', $this->_blocksName)) {
             $blocksName[] = 'messages';
@@ -153,6 +151,20 @@ class MSP_LTS2_Model_Layout
         if (!in_array('global_messages', $this->_blocksName)) {
             $blocksName[] = 'global_messages';
         }
+
+        $layoutHandles = array_unique($layoutHandles);
+        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+            $layoutHandles[] = 'customer_logged_in';
+            if (($key = array_search('customer_logged_out', $layoutHandles)) !== false) {
+                unset($layoutHandles[$key]);
+            }
+        } else {
+            $layoutHandles[] = 'customer_logged_out';
+            if (($key = array_search('customer_logged_in', $layoutHandles)) !== false) {
+                unset($layoutHandles[$key]);
+            }
+        }
+        $layoutHandles = array_unique($layoutHandles);
 
         $cache = Mage::getSingleton('msp_lts2/cache');
 
@@ -191,7 +203,7 @@ class MSP_LTS2_Model_Layout
             }
 
             // Adding references
-                        $parsedBlocks = array();
+            //$parsedBlocks = array();
             $xPath = $dynamicLayout->xpath("//block");
             foreach ($xPath as $child) {
                 $attrs = $child->attributes();
