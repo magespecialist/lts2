@@ -382,7 +382,15 @@ class MSP_LTS2_Model_Cache
     {
         $invalidations = Mage::getSingleton('msp_ltsr2/cache')->getBlocksModelInvalidation($modelInstance);
         $tags = array();
-        
+
+        if ($modelInstance instanceof Mage_CatalogInventory_Model_Stock_Item) {
+            $parentIds = Mage::getSingleton('catalog/product_type_configurable')
+                ->getParentIdsByChild($modelInstance->getProductId());
+            foreach($parentIds as $parentId) {
+                $tags[] = 'CATALOG_PRODUCT_' . $parentId;
+            }
+        }
+
         foreach ($invalidations['global'] as $blockName) {
             $tags[] = 'MSP_BLOCK_NAME_'.$blockName;
         }
